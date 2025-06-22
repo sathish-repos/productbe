@@ -1,6 +1,6 @@
 # E-commerce Backend Application (ES Module Syntax)
 
-This is a robust backend application built with Node.js, Express.js, and MongoDB, designed for an e-commerce platform, now using **ES Module syntax (import/export)**. It includes user authentication with JWT, product management, shopping cart functionality, and purchase history tracking.
+This is a robust backend application built with Node.js, Express.js, and MongoDB, designed for an e-commerce platform, now using **ES Module syntax (import/export)** and **file-based logging**. It includes user authentication with JWT, product management, shopping cart functionality, and purchase history tracking.
 
 ## Features
 
@@ -12,7 +12,7 @@ This is a robust backend application built with Node.js, Express.js, and MongoDB
 - **Purchase History:** Track user purchases.
 - **Password Hashing:** Secure password storage using bcrypt.js.
 - **CORS:** Configured for Cross-Origin Resource Sharing.
-- **Logging:** Basic request logging.
+- **Logging:** Centralized file-based logging using Winston, with API endpoints to view and clear logs.
 - **Error Handling:** Centralized error handling.
 
 ## Technologies Used
@@ -24,23 +24,26 @@ This is a robust backend application built with Node.js, Express.js, and MongoDB
 - Bcrypt.js
 - CORS
 - Dotenv
+- Winston (for logging)
 
 ## Project Structure
 
 ```
 .
 ├── config/
-│   └── db.js            # MongoDB connection setup
+│   ├── db.js            # MongoDB connection setup
+│   └── logger.js        # Winston logger configuration
 ├── controllers/
 │   ├── authController.js    # Authentication logic
 │   ├── cartController.js    # Shopping cart logic
+│   ├── logController.js     # Log management logic
 │   ├── productController.js # Product CRUD logic
 │   ├── purchaseController.js# Purchase history logic
 │   └── userController.js    # User CRUD logic
 ├── middlewares/
 │   ├── auth.js          # JWT authentication middleware
 │   ├── error.js         # Centralized error handling middleware
-│   └── logger.js        # Custom request logger
+│   └── logger.js        # Custom request logger middleware using Winston
 ├── models/
 │   ├── Cart.js          # Cart Mongoose model
 │   ├── Product.js       # Product Mongoose model
@@ -49,9 +52,12 @@ This is a robust backend application built with Node.js, Express.js, and MongoDB
 ├── routes/
 │   ├── auth.js          # Authentication routes
 │   ├── cart.js          # Shopping cart routes
+│   ├── log.js           # Log management routes
 │   ├── product.js       # Product routes
 │   ├── purchase.js      # Purchase history routes
 │   └── user.js          # User routes
+├── logs/                # Directory for log files (will be created automatically)
+│   └── app.log          # Main application log file
 ├── .env                 # Environment variables (create this file)
 ├── server.js            # Main application entry point
 └── package.json         # Project dependencies and scripts
@@ -67,7 +73,7 @@ This is a robust backend application built with Node.js, Express.js, and MongoDB
 
     ```bash
     npm init -y
-    npm install express mongoose jsonwebtoken bcryptjs dotenv cors morgan
+    npm install express mongoose jsonwebtoken bcryptjs dotenv cors morgan winston
     ```
 
 3.  **Update `package.json`:**
@@ -79,7 +85,7 @@ This is a robust backend application built with Node.js, Express.js, and MongoDB
       "version": "1.0.0",
       "description": "E-commerce backend with Node.js, Express, MongoDB, JWT",
       "main": "server.js",
-      "type": "module",  <-- ADD THIS LINE
+      "type": "module",
       "scripts": {
         "start": "node server.js",
         "dev": "nodemon server.js"
@@ -94,7 +100,8 @@ This is a robust backend application built with Node.js, Express.js, and MongoDB
         "express": "^4.19.2",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.4.3",
-        "morgan": "^1.10.0"
+        "morgan": "^1.10.0",
+        "winston": "^3.13.0"
       },
       "devDependencies": {
         "nodemon": "^3.1.4"
@@ -109,6 +116,7 @@ This is a robust backend application built with Node.js, Express.js, and MongoDB
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret_key
     PORT=5000
+    LOG_FILE_PATH=./logs/app.log   <-- ADD THIS LINE
     ```
 
     - Replace `your_mongodb_connection_string` with your MongoDB connection URI (e.g., `mongodb://localhost:27017/ecommerce` or a MongoDB Atlas URI).
@@ -187,17 +195,23 @@ All endpoints are prefixed with `/api`.
 - `GET /api/purchase` - Get the authenticated user's purchase history.
 - `GET /api/purchase/:id` - Get details of a specific purchase by ID.
 
+### Log Management (Requires Admin Role)
+
+- `GET /api/logs` - Get the content of the application log file.
+- `DELETE /api/logs` - Delete (clear) the application log file.
+
 ## Error Handling
 
 The application uses centralized error handling middleware to catch and format errors, returning appropriate HTTP status codes and messages.
 
 ## Logging
 
-A custom logger middleware (or Morgan, if uncommented in `server.js`) logs incoming requests to the console.
+A custom logger middleware (using Winston) logs incoming requests to a file specified in `.env`. Console logging is also enabled.
 
 ## Security Considerations
 
 - **JWT Secret:** Keep your `JWT_SECRET` strong and confidential.
 - **Password Hashing:** Passwords are hashed using bcrypt before storage.
 - **CORS:** Configured to allow requests from any origin (`*`) for development. For production, restrict this to your frontend URL.
-- **Environment Variables:** Sensitive information (like DB connection strings and JWT secrets) is stored in `.env` files and not hardcoded.
+- **Environment Variables:** Sensitive information (like DB connection strings, JWT secrets, and log file paths) is stored in `.env` files and not hardcoded.
+- **Log Access:** Access to log files via API is restricted to users with the 'admin' role.

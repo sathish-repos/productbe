@@ -1,0 +1,24 @@
+{"level":"info","message":"Server running on port 5000","service":"e-commerce-backend","timestamp":"2025-06-23 00:31:03"}
+{"level":"info","message":"Server running on port http://localhost:5000","service":"e-commerce-backend","timestamp":"2025-06-23 00:32:32"}
+{"level":"info","message":"Server running on port http://localhost:5000","service":"e-commerce-backend","timestamp":"2025-06-23 00:33:50"}
+{"level":"info","message":"Server running on port http://localhost:5000","service":"e-commerce-backend","timestamp":"2025-06-23 00:34:46"}
+{"level":"info","message":"Server running on port http://localhost:5000","service":"e-commerce-backend","timestamp":"2025-06-23 00:35:17"}
+{"level":"info","message":"Server running on port http://localhost:4000","service":"e-commerce-backend","timestamp":"2025-06-23 00:36:08"}
+{"level":"info","message":"GET http://localhost:4000/","service":"e-commerce-backend","timestamp":"2025-06-23 00:36:12"}
+{"level":"info","message":"GET http://localhost:4000/api/logs","service":"e-commerce-backend","timestamp":"2025-06-23 00:39:14"}
+{"level":"warn","message":"Log file not found at /Users/sathish/Desktop/nodejs/productbe/logs/app.log","service":"e-commerce-backend","timestamp":"2025-06-23 00:39:14"}
+{"level":"info","message":"Server running on port http://localhost:4000","service":"e-commerce-backend","timestamp":"2025-06-23 00:41:22"}
+{"level":"info","message":"GET http://localhost:4000/api/logs","service":"e-commerce-backend","timestamp":"2025-06-23 00:41:29"}
+{"level":"warn","message":"Log file not found at /Users/sathish/Desktop/nodejs/productbe/logs/app.log","service":"e-commerce-backend","timestamp":"2025-06-23 00:41:29"}
+{"level":"info","message":"Server running on port http://localhost:4000","service":"e-commerce-backend","timestamp":"2025-06-23 00:42:33"}
+{"level":"info","message":"GET http://localhost:4000/api/logs","service":"e-commerce-backend","timestamp":"2025-06-23 00:42:40"}
+{"level":"info","message":"Admin user 68584cb49036b36c8b1ad773 accessed logs.","service":"e-commerce-backend","timestamp":"2025-06-23 00:42:40"}
+{"level":"info","message":"GET http://localhost:4000/api/logs","service":"e-commerce-backend","timestamp":"2025-06-23 00:42:53"}
+{"level":"info","message":"Admin user 68584cb49036b36c8b1ad773 accessed logs.","service":"e-commerce-backend","timestamp":"2025-06-23 00:42:53"}
+{"level":"info","message":"GET http://localhost:4000/api/logs","service":"e-commerce-backend","timestamp":"2025-06-23 00:42:57"}
+{"level":"info","message":"Admin user 68584cb49036b36c8b1ad773 accessed logs.","service":"e-commerce-backend","timestamp":"2025-06-23 00:42:57"}
+{"level":"info","message":"Server running on port http://localhost:4000","service":"e-commerce-backend","timestamp":"2025-06-23 00:43:29"}
+{"level":"info","message":"Server running on port http://localhost:4000","service":"product-be","timestamp":"2025-06-23 00:49:02"}
+{"level":"info","message":"GET http://localhost:4000/api/products","service":"product-be","timestamp":"2025-06-23 00:49:16"}
+{"level":"info","message":"GET http://localhost:4000/api/logs","service":"product-be","timestamp":"2025-06-23 00:49:22"}
+{"level":"info","message":"Admin user 68584cb49036b36c8b1ad773 accessed logs.","service":"product-be","timestamp":"2025-06-23 00:49:22"}
