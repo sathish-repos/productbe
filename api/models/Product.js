@@ -1,36 +1,59 @@
+// models/Product.js
 import mongoose from "mongoose";
 
-const ProductSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Please add a product name"],
-    trim: true,
-    maxlength: [100, "Name can not be more than 100 characters"],
+const reviewSchema = new mongoose.Schema(
+  {
+    rating: { type: Number, required: true },
+    comment: String,
+    date: { type: Date, default: Date.now },
+    reviewerName: String,
+    reviewerEmail: String,
   },
-  description: {
-    type: String,
-    required: [true, "Please add a description"],
-    maxlength: [500, "Description can not be more than 500 characters"],
+  { _id: false }
+);
+
+const dimensionsSchema = new mongoose.Schema(
+  {
+    width: Number,
+    height: Number,
+    depth: Number,
   },
-  price: {
-    type: Number,
-    required: [true, "Please add a price"],
-    min: 0,
+  { _id: false }
+);
+
+const metaSchema = new mongoose.Schema(
+  {
+    createdAt: { type: Date },
+    updatedAt: { type: Date },
+    barcode: String,
+    qrCode: String,
   },
-  category: {
-    type: String,
-    required: [true, "Please add a category"],
-    enum: ["Electronics", "Books", "Clothing", "Home", "Beauty", "Sports"],
-  },
-  stock: {
-    type: Number,
-    required: [true, "Please add stock quantity"],
-    min: 0,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  { _id: false }
+);
+
+const productSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: String,
+  category: String,
+  price: { type: Number, required: true },
+  discountPercentage: Number,
+  rating: Number,
+  stock: Number,
+  tags: [String],
+  brand: String,
+  sku: String,
+  weight: Number,
+  dimensions: dimensionsSchema,
+  warrantyInformation: String,
+  shippingInformation: String,
+  availabilityStatus: String,
+  reviews: [reviewSchema],
+  returnPolicy: String,
+  minimumOrderQuantity: Number,
+  meta: metaSchema,
+  images: [String],
+  thumbnail: String,
+  createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("Product", ProductSchema);
+export default mongoose.model("Product", productSchema);

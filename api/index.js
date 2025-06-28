@@ -18,8 +18,8 @@ const app = express();
 // Middleware
 app.use(express.json()); // Body parser for JSON
 app.use(cors()); // Enable CORS for all routes
-// app.use(morgan('dev')); // HTTP request logger middleware, uncomment to use instead of custom requestLogger
-app.use(requestLogger); // Custom request logger middleware using Winston
+app.use(morgan("dev")); // HTTP request logger middleware, uncomment to use instead of custom requestLogger
+//app.use(requestLogger); // Custom request logger middleware using Winston
 
 // Route files
 import authRoutes from "./routes/auth.js";
@@ -30,12 +30,12 @@ import purchaseRoutes from "./routes/purchase.js";
 import logRoutes from "./routes/log.js"; // New: Log management routes
 
 // Mount routes
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/products", productRoutes);
-app.use("/api/cart", cartRoutes);
-app.use("/api/purchase", purchaseRoutes);
-app.use("/api/logs", logRoutes); // New: Mount log management routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/products", productRoutes);
+app.use("/api/v1/cart", cartRoutes);
+app.use("/api/v1/purchase", purchaseRoutes);
+app.use("/api/v1/logs", logRoutes); // New: Mount log management routes
 
 app.get("/", (req, res) => res.send(`<h1>welcome to productBE!`));
 
